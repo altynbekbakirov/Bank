@@ -16,6 +16,7 @@ public class Account {
     private String username;
     private String password;
     private Role role;
+    private Double balance;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Operation> operations;
@@ -23,9 +24,10 @@ public class Account {
     public Account() {
     }
 
-    public Account(String username, String password, Role role) {
+    public Account(String username, String password, Role role, Double balance) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.balance = balance;
     }
 }

@@ -22,21 +22,20 @@ public class OperationService {
         this.accountRepository = accountRepository;
     }
 
-    public List<Operation> getOperationsByAccountId(Long id) {
-        return operationRepository.getAllByAccountId(id);
+    public List<Operation> getAllOperations() {
+        return operationRepository.findAll();
     }
 
-    public Operation addOperation(Operation operation, Long id) {
-        Account account = accountRepository.getReferenceById(id);
-        operation.setAccount(account);
-        return operationRepository.save(operation);
+    public Account getAccount() {
+        return accountRepository.findAll().get(0);
     }
 
     @Transactional
-    public Operation payOperation(Long id) {
-        Account account = accountRepository.getReferenceById(id);
+    public Operation payOperation() {
+        Account account = accountRepository.findAll().get(0);
         Operation operation = new Operation();
         operation.setCount(1.1);
+        account.setBalance(account.getBalance() - 1.1);
         operation.setTypes(OperationTypes.PAYMENT);
         operation.setAccount(account);
         return operationRepository.save(operation);
